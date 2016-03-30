@@ -28,5 +28,6 @@ add_action( 'init', 'wordpress101_theme_setup' );
 add_theme_support( 'custom-background' );
 add_theme_support( 'custom-header' );
 add_theme_support( 'post-thumbnails' );
+add_theme_support( 'post-formats', array( 'aside', 'image', 'video' ) );
 
 add_filter( 'show_admin_bar', '__return_false' );
