@@ -1,13 +1,24 @@
 <?php get_header(); ?>
 
-	<?php if( have_posts(  ) ) : ?>
+<div class="row">
 
-		<?php while( have_posts() ) : the_post(); ?>
+	<div class="col-xs-12 col-sm-8">
 
-			<?php get_template_part( 'content', get_post_format() ); ?>
+		<?php if( have_posts(  ) ) : ?>
 
-		<?php endwhile; ?>
+			<?php while( have_posts() ) : the_post(); ?>
 
-	<?php endif; ?>
+				<?php get_template_part( 'content', get_post_format() ); ?>
 
+			<?php endwhile; ?>
+
+		<?php endif; ?>
+
+	</div>
+
+	<div class="col-xs-12 col-sm-4">
+		<?php get_sidebar(); ?>
+	</div>
+
+</div>
 <?php get_footer(); ?>
