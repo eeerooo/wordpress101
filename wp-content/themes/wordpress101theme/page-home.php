@@ -1,18 +1,32 @@
 <?php get_header(); ?>
 
 <div class="row">
-
-	<div class="col-xs-12">
 		
-		<?php
+	<?php
 
-			$lastBlog = new WP_Query( 'type=post&posts_per_page=1' );
+		$args_cat = array(
+			'include'		=> '7, 13',
+		);
 
-			if( $lastBlog -> have_posts(  ) ) :
+		$categories = get_categories( $args_cat );
+		foreach( $categories as $category ):
+
+			$args = array(
+				'type'				=>	'post',
+				'posts_per_page'	=>	1,
+				'category__in'		=> $category -> term_id,
+				'category__not_in'	=> array( 1 )
+			);
+
+			$lastBlog = new WP_Query( $args );
+
+			if( $lastBlog -> have_posts() ) :
 
 				while( $lastBlog -> have_posts() ) : $lastBlog -> the_post(); ?>
-
-					<?php get_template_part( 'content', get_post_format() ); ?>
+					
+					<div class="col-xs-12 col-sm-4">
+						<?php get_template_part( 'content', 'featured' ); ?>
+					</div>
 
 				<?php endwhile;
 
@@ -20,9 +34,13 @@
 
 			wp_reset_postdata();
 
-		?>
+		endforeach;
 
-	</div>
+	?>
+
+</div>
+
+<div class="row">
 
 	<div class="col-xs-12 col-sm-8">
 
@@ -35,7 +53,7 @@
 			<?php endwhile; ?>
 
 		<?php endif; ?>
-
+<!-- 
 		<?php
 
 			// print other 2 posts not the first one
@@ -61,9 +79,9 @@
 			wp_reset_postdata();
 
 		?>
-
-		<hr>
-
+ -->
+		<!-- <hr> -->
+<!-- 
 		<?php
 
 			// print only asia
@@ -82,7 +100,7 @@
 			wp_reset_postdata();
 
 		?>
-
+ -->
 	</div>
 
 	<div class="col-xs-12 col-sm-4">
